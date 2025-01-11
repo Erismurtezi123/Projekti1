@@ -175,49 +175,57 @@ footer .glyphicon {
     color: #2b2c3c;
 }
 
-.slideanim {visibility: hidden;}
-.slide{
+.slideanim {
+    visibility: hidden;
+}
+
+.slide {
     animation-name: slide;
     -webkit-animation-name: slide;
     animation-duration: 1s;
-    -webkit-animation-direction: 1s;
+    -webkit-animation-duration: 1s;
+    animation-direction: normal; /* Correcting the invalid direction */
     visibility: visible;
 }
 
-@keyframes slides {
+@keyframes slide {
     0% {
         opacity: 0;
         transform: translateY(70%);
     }
-    100%{
-opacity: 1;
-transform: translateY(0%);
-    }    
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
 }
+
 @-webkit-keyframes slide {
-    0%{
+    0% {
         opacity: 0;
         -webkit-transform: translateY(70%);
     }
-    100%{
+    100% {
         opacity: 1;
         -webkit-transform: translateY(0%);
     }
 }
-@media screen  and (max-width:768px) {
-.col-sm-4{
-    text-alingn:center;
-    margin: 25px 0;
-}
-.btn-lg {
-    width: 100%;
-    margin-bottom: 35px;
-}
-}
-    @media screen and (max-width: 480px) {
-        .log{
-            font-size: 150px;
-        }
+
+@media screen and (max-width: 768px) {
+    .col-sm-4 {
+        text-align: center; /* Fixed typo here from 'text-alingn' to 'text-align' */
+        margin: 25px 0;
     }
+    .btn-lg {
+        width: 100%;
+        margin-bottom: 35px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .log {
+        font-size: 150px;
+    }
+}
+
 
 
