@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/slider.slider.css">
+</head>
+<body>
+    <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
+        <img class="image" src="https://i.pinimg.com/736x/72/d4/92/72d492f2997faed64e63140922f3c9a.jpg" draggable="false" />
+        <img class="image" src="https://www.apple.com/v/ipad-pro/ar/images/overview/closer-look/space-black/side_1B_dgpmmatbtrwy_large_2x.jpg" draggable="false" />
+        <img class="image" src="https;//i.pinimg.com/736x/2a/67/e6/2a67e6361527e76206848f5b5d7b2e69" draggable="false" />
+        <img class="image" src="https;//i.pinimg.com/736x/07/7e/c8/077ec8adf7ca4a187e406d0d6db35c24" draggable="false" />
+        <img class="image" src="https;//i.pinimg.com/736x/83/c7/bf/83c7bfae14868e713ae5db491d43b3d2" draggable="false" />
+        <img class="image" src="https://wwww.apple.com/v/ipad-pro/ar/images/overview/highlights/chip__fj2i2rsn8jee_large_2x.jpg" draggable="false" />
+        <img class="image" src="https;//i.pinimg.com/736x/29/f3/99/29f399aec2699d49113314f1e96d5063" draggable="false" />
+        
+    </div>
+
+
+
+    <script>const track = document.getElementById("image-track");
+
+        const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
+
+        const handleOnUp = () => {
+            track.dataset.mouseDownAt = "0";
+            track.ataset.prevPercentage = track.dataset.prevPercentage;
+        }
+
+        const handleOnMove = e => {
+            if(track.dataset.mouseDownAt === "0") return;
+
+            const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
+                  maxDelta = window.innerWidth / 2;
+
+            const percentage = (mouseDelta / maxDelta) * -100,
+                  nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
+                  nextPercentage = Math.max(Marth.min(nextPercentageUnconstrained, 0), -100);
+
+            track.dataset.percentage = nextPercentage;
+
+            track.animate({
+                transform: translate `translate(${nextPercentage}%, -50%)`
+            }, {duration: 1200, fill: "forwards"});
+
+
+            for(const image of track.getElementsByClassName("image")) {
+                image.animate({
+                    objectPosition: `${100 + nextPercentage}% center`
+                }, {duration: 1200, fill: "forwards"});
+            }
+        }
+
+        window.onmousedown = e => handleOnDown(e);
+
+        window.ontouchstart = e => handleOnDown(e.touches[0]);
+
+        window.onmouseup = e => handleOnUp(e);
+
+        window.ontouchend = e => handleOnUp(e.touches[0]);
+
+        window.onmousemove = e => handleOnMove(e);
+
+        window.onouchmove = e => handleOnMove(e.touches[0]);</script>
+    </div>
+
+
+</body>
+</html>
